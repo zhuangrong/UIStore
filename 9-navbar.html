@@ -1,0 +1,75 @@
+<!--
+  * navbar.html
+	* 导航栏
+	* 备注: 只要修改flex-direction:column就可以改变垂直布局
+	* 触发键:9
+-->
+
+<style>
+/*导航栏*/
+nav{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: -webkit-box; 
+	display: -webkit-flex;
+	display: flex;
+	height: 44px;
+	background-color: #fff;
+	border-top: 1px solid  #ccc;
+}
+nav a{
+	-webkit-box-flex:1;
+	-webkit-flex:1;
+  flex:1;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	/*flex-direction:column; */ /*纵向*/
+	-webkit-align-items: center; /*垂直方向*/
+	-webkit-box-align: center;
+	justify-content: center; /*水平方向*/
+	font-size: 13px;
+	color: #808080;
+}
+nav a.active{
+	color: #f30;
+}
+nav a i{
+	width: 20px;
+	height: 35px;
+	margin-right: 5px; /*切换纵横时修改*/
+}
+nav a i.icon-home{	
+	background-image: url(images/icon-home.png);
+}
+nav a.active i.icon-home{	
+	background-image: url(images/icon-home-active.png);
+}
+nav a i.icon-push{	
+	background-image: url(images/icon-push.png);
+}
+nav a i.icon-user{	
+	background-image: url(images/icon-user.png);
+}
+</style>
+
+<h1 class="title">导航栏 <span>#9</span></h1>
+<!----------------------导航栏#9-------------------->
+<nav>
+	<a href="#" class="active"><i class="icon-home"></i><span>首页</span></a>
+	<a href="#"><i class="icon-push"></i><span>发布</span></a>
+	<a href="#"><i class="icon-user"></i><span>个人中心</span></a>
+</nav>
+
+
+
+
+
+
+
+
+
+
+

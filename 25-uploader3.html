@@ -1,0 +1,193 @@
+<!--
+  * uploader.html
+	* 图片上传
+	* 触发键:17
+-->
+<style>
+  html{
+    font-size: 50px;
+  }
+/*图片上传*/
+.upload-wrap{
+	min-height: 2.9rem;
+}
+.btn-file{
+	position: relative;
+	width: 100%;
+	height: 0;
+	vertical-align: middle;
+	-webkit-appearance: none;
+	border: none;
+}
+.btn-file:after{
+  position: absolute;
+  content: "+";
+  display: block;
+  top: -10px;
+  right: 0;
+  left: 0;
+  width: 100%;
+  line-height: 2.1rem;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid  #ccc;
+  border-radius: .1rem;
+  text-align: center;
+  font-size: .8rem;
+  box-sizing: border-box;
+}
+.photo{
+	position: relative;
+	clear: both;
+	min-height: 2rem;
+	overflow: hidden;
+}
+.photo div{
+	position: relative;
+	display: inline-block;
+	margin-right: 3px;
+	border-radius: .1rem;
+	background-color: #333;
+	width: 2rem;
+	height: 2rem;
+	overflow: hidden;
+}
+.photo div i.del{
+	position: absolute;
+	top: 3px;
+	right: 3px;
+	z-index: 99;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 16px;
+	font-style: normal;
+	color: #000;
+	background-color: #fff;
+}
+.photo img{
+  position: absolute;
+  z-index: 9;
+	width: 2rem;
+	height: 2rem;
+  opacity: 1;
+  -webkit-transition: all 0.2s;
+}
+   
+/*查看大图*/
+.gallery{
+	display: none;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: #000;
+	z-index: 1000;
+}
+.gallery span{
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 60px;
+	left: 0;
+	background: center center no-repeat;
+	background-size: contain;
+}
+/*上传*/
+.loading {
+	position: absolute;
+	top: 28px;
+	left: 28px;
+	display: none;
+	width: 38px;
+	height: 38px;
+	-webkit-animation: loading 1s steps(12, end) infinite;
+	background: transparent url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgxMDB2MTAwSDB6Ii8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTlFOUU5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgLTMwKSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iIzk4OTY5NyIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgzMCAxMDUuOTggNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjOUI5OTlBIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDYwIDc1Ljk4IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0EzQTFBMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCA2NSA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNBQkE5QUEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoMTIwIDU4LjY2IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0IyQjJCMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgxNTAgNTQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjQkFCOEI5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDE4MCA1MCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDMkMwQzEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTE1MCA0NS45OCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDQkNCQ0IiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTEyMCA0MS4zNCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNEMkQyRDIiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDM1IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0RBREFEQSIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgtNjAgMjQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTJFMkUyIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKC0zMCAtNS45OCA2NSkiLz48L3N2Zz4=) no-repeat;
+	background-size: 100%;
+	z-index: 9999;
+}
+@-webkit-keyframes loading {
+  0% {
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+  100% {
+    transform: rotate3d(0, 0, 1, 360deg);
+  }
+}
+</style>
+
+
+<h1 class="title">图片上传3-最多可上传3张<span>#25</span></h1>
+
+<!----------------------图片上传#25-------------------->
+<div class="upload-wrap">
+   <input id="img2" class="btn-file" type="file" accept="image/*">
+</div>
+<div class="photo" id="photo2">
+<!--  <div></div>-->
+  <span class="loading" id="pre-load"></span>
+</div>
+
+<!--大图弹出层-->
+<div class="gallery">
+  <span></span>
+</div>
+
+<script>
+$(function(){
+	  
+	//参赛图片上传
+	$('#img2').change(function() {
+      var r = new FileReader();
+      r.readAsDataURL(this.files[0]);
+    
+      var img = new Image();
+      var upImg = $('#photo2');
+      var preLoad = $("#pre-load");
+    
+      preLoad.show()    
+      
+      if($('#photo2 > div').length == 1){
+        preLoad.css("left","130px")
+      }
+      if($('#photo2 > div').length == 2){
+        preLoad.css("left","230px")
+      }
+    
+			$(r).load(function() {
+        img.src = this.result;
+        img.onload = function() {
+          
+					upImg.append('<div><img src="' + img.src + '" /><i class="del">×</i></div>'); 
+          
+          preLoad.hide() 
+          setTimeout(function() {
+            upImg.find("div").find("img").css("opacity", 1);
+          }, 500);
+        }
+			})
+	})
+	//删除
+	$(document).on("click", ".del", function(e){
+		 e.stopPropagation()
+		 $(this).parent().remove();
+	})
+  
+  //点击缩略图
+	$("#photo2").on("click", "img", function(){
+      var imgSrc = $(this).attr("src");
+      $(".gallery span").attr("style", "background-image:url(" + imgSrc + ")")
+			$(".gallery").fadeIn(100)
+	})
+	
+	//点击大图隐藏
+	$(".gallery").on("click",function(e){
+			e.stopPropagation()
+			$(".gallery").fadeOut(200)
+	})
+	  
+});
+</script>

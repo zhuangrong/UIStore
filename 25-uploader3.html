@@ -23,7 +23,7 @@
   position: absolute;
   content: "+";
   display: block;
-  top: -10px;
+  top: -.1rem;
   right: 0;
   left: 0;
   width: 100%;
@@ -35,6 +35,10 @@
   font-size: .8rem;
   box-sizing: border-box;
 }
+  .btn-file.dised:after{
+    color: #ccc;
+    background-color: #eee;
+  }
 .photo{
 	position: relative;
 	clear: both;
@@ -44,7 +48,7 @@
 .photo div{
 	position: relative;
 	display: inline-block;
-	margin-right: 3px;
+	margin-right: .03rem;
 	border-radius: .1rem;
 	background-color: #333;
 	width: 2rem;
@@ -53,15 +57,15 @@
 }
 .photo div i.del{
 	position: absolute;
-	top: 3px;
-	right: 3px;
+	top: .06rem;
+	right: .06rem;
 	z-index: 99;
-	width: 20px;
-	height: 20px;
-	line-height: 20px;
+	width: .4rem;
+	height: .4rem;
+	line-height: .4rem;
 	border-radius: 50%;
 	text-align: center;
-	font-size: 16px;
+	font-size: .32rem;
 	font-style: normal;
 	color: #000;
 	background-color: #fff;
@@ -71,7 +75,7 @@
   z-index: 9;
 	width: 2rem;
 	height: 2rem;
-  opacity: 1;
+  opacity: 0;
   -webkit-transition: all 0.2s;
 }
    
@@ -91,19 +95,32 @@
 	position: absolute;
 	top: 0;
 	right: 0;
-	bottom: 60px;
+	bottom: 0;
 	left: 0;
 	background: center center no-repeat;
 	background-size: contain;
 }
 /*上传*/
-.loading {
-	position: absolute;
-	top: 28px;
-	left: 28px;
-	display: none;
-	width: 38px;
-	height: 38px;
+.loading{
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: .1rem;
+  background-color: #333;
+  width: 2rem;
+  height: 2rem;
+  display: none;
+}
+.loading:after{
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -.38rem;
+  margin-left: -.38rem;
+	width: .76rem;
+	height: .76rem;
 	-webkit-animation: loading 1s steps(12, end) infinite;
 	background: transparent url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgxMDB2MTAwSDB6Ii8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTlFOUU5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgLTMwKSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iIzk4OTY5NyIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgzMCAxMDUuOTggNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjOUI5OTlBIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDYwIDc1Ljk4IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0EzQTFBMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCA2NSA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNBQkE5QUEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoMTIwIDU4LjY2IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0IyQjJCMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgxNTAgNTQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjQkFCOEI5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDE4MCA1MCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDMkMwQzEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTE1MCA0NS45OCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDQkNCQ0IiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTEyMCA0MS4zNCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNEMkQyRDIiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDM1IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0RBREFEQSIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgtNjAgMjQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTJFMkUyIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKC0zMCAtNS45OCA2NSkiLz48L3N2Zz4=) no-repeat;
 	background-size: 100%;
@@ -150,23 +167,30 @@ $(function(){
     
       preLoad.show()    
       
+      
+       if($('#photo2 > div').length == 0){
+        preLoad.css("left","0")
+      }
       if($('#photo2 > div').length == 1){
-        preLoad.css("left","130px")
+        preLoad.css("left","2.06rem")
       }
       if($('#photo2 > div').length == 2){
-        preLoad.css("left","230px")
+        preLoad.css("left","4.12rem")
+        //最多上传3张图片
+        $("#img2").attr("disabled", true).addClass("dised");
       }
-    
+      if($('#photo2 > div').length == 3){
+        preLoad.css("left","6.18rem");
+      }
 			$(r).load(function() {
         img.src = this.result;
         img.onload = function() {
-          
 					upImg.append('<div><img src="' + img.src + '" /><i class="del">×</i></div>'); 
-          
-          preLoad.hide() 
+          //隐藏loading
+          preLoad.fadeOut(100) 
           setTimeout(function() {
             upImg.find("div").find("img").css("opacity", 1);
-          }, 500);
+          }, 10);
         }
 			})
 	})
@@ -174,11 +198,12 @@ $(function(){
 	$(document).on("click", ".del", function(e){
 		 e.stopPropagation()
 		 $(this).parent().remove();
+     $("#img2").attr("disabled", false).removeClass("dised");
 	})
   
   //点击缩略图
 	$("#photo2").on("click", "img", function(){
-      var imgSrc = $(this).attr("src");
+      var imgSrc = $(this).attr("src")
       $(".gallery span").attr("style", "background-image:url(" + imgSrc + ")")
 			$(".gallery").fadeIn(100)
 	})

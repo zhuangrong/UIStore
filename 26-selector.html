@@ -1,0 +1,107 @@
+<!--
+  * selector.html
+	* 下拉框
+	* 触发键:26
+-->
+<script>
+$(function(){
+  var ipt = $("#ipt")
+  var selPop =  ipt.next(".selector-pop")
+  var maskW = $(".mask-white")
+  
+	//下拉框弹出
+	ipt.on("click",function(){
+			maskW.fadeIn(300)
+		  selPop.fadeIn(200);
+	})	
+	selPop.on("click", "dd", function(e){
+	 	 e.stopPropagation();
+		 var txt = $(this).text();
+		 ipt.val(txt)
+		 selPop.fadeOut(200);
+		 maskW.fadeOut(300)
+	})
+	
+	//点击遮罩层隐藏
+	maskW.on("click",function(e){
+      e.stopPropagation();
+			maskW.fadeOut(300)
+		  selPop.fadeOut(200)		
+	})
+})
+</script>
+<style>
+/*下拉框*/
+.ipt01{
+  width: 100%;
+  line-height: 30px;
+  padding: 0 10px;
+  border: 1px solid  #ccc;
+  background-color: #fff;
+  border-radius: 3px;
+}
+.ipt01::-webkit-input-placeholder {
+  color:#f00;
+}
+/*弹出下拉层*/
+.selector-pop{
+	position: absolute;
+	top: 32px;
+	left: 0;
+	right: 0;
+	z-index: 9999;
+	background-color: #fff;
+	border: 1px solid  #efefef;
+	border-radius: .1rem;
+}
+.selector-pop dl dd{
+	line-height: 2.3;
+	text-align: center;
+}
+.selector-pop dl dd:active{
+  background-color: #efefef;
+}
+.selector-icon{
+  position: relative;
+}
+.selector-icon:after{
+  content: '▼';
+  position: absolute;
+  display: block;
+  top: 7px;
+  right: 10px;
+  font-size: 12px;
+  color: #aaa;
+}
+.mask-white {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 1;
+	background-color: rgba(0, 0, 0, 0);
+	display: none;
+}
+</style>
+
+
+<h1 class="title">下拉框<span>#26</span></h1>
+<!----------------------下拉框#26-------------------->
+<div>
+  <ul>
+    <li class="selector-icon">
+      <input type="text" class="ipt01" id="ipt" readonly  placeholder="城市">
+      <div class="selector-pop" style="display: none">
+        <dl>        
+          <dd>北京</dd>
+          <dd>天津</dd>
+          <dd>上海</dd>
+          <dd>广州</dd>
+          <dd>深圳</dd>
+        </dl>
+      </div>
+      <div class="mask-white"></div>
+    </li>
+  </ul>
+</div>

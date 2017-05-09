@@ -5,22 +5,26 @@
 -->
 <script>
 $(function(){
-  var ipt = $("#ipt")
-  var selPop =  ipt.next(".selector-pop")
+  var ipt = $(".ipt01")
+  var selPop = $(".selector-pop")
   var maskW = $(".mask-white")
   
 	//下拉框弹出
-	ipt.on("click",function(){
-			maskW.fadeIn(300)
-		  selPop.fadeIn(200);
-	})	
-	selPop.on("click", "dd", function(e){
-	 	 e.stopPropagation();
-		 var txt = $(this).text();
-		 ipt.val(txt)
-		 selPop.fadeOut(200);
-		 maskW.fadeOut(300)
-	})
+  ipt.each(function(){
+    $(this).on("click",function(){
+      var _this = $(this)
+      var selPop =  _this.next(".selector-pop")
+      maskW.fadeIn(300)
+      
+      //绑定弹出层选项
+      selPop.fadeIn(200).find("dd").bind("click", function(){
+         var txt = $(this).text();
+         _this.val(txt)
+         selPop.fadeOut(200);
+         maskW.fadeOut(300)
+      });
+    })
+  })	
 	
 	//点击遮罩层隐藏
 	maskW.on("click",function(e){
@@ -31,6 +35,9 @@ $(function(){
 })
 </script>
 <style>
+  li{
+    margin-top: 10px;
+  }
 /*下拉框*/
 .ipt01{
   width: 100%;
@@ -91,7 +98,7 @@ $(function(){
 <div>
   <ul>
     <li class="selector-icon">
-      <input type="text" class="ipt01" id="ipt" readonly  placeholder="城市">
+      <input type="text" class="ipt01" readonly  placeholder="城市">
       <div class="selector-pop" style="display: none">
         <dl>        
           <dd>北京</dd>
@@ -99,6 +106,19 @@ $(function(){
           <dd>上海</dd>
           <dd>广州</dd>
           <dd>深圳</dd>
+        </dl>
+      </div>
+      <div class="mask-white"></div>
+    </li>
+    <li class="selector-icon">
+      <input type="text" class="ipt01" readonly  placeholder="街道">
+      <div class="selector-pop" style="display: none">
+        <dl>        
+          <dd>街道1</dd>
+          <dd>街道2</dd>
+          <dd>街道3</dd>
+          <dd>街道4</dd>
+          <dd>街道5</dd>
         </dl>
       </div>
       <div class="mask-white"></div>
